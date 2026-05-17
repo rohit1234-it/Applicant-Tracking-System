@@ -1,18 +1,30 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Candidates</title>
+
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
 
-<h2>Candidate List (ATS Score)</h2>
+<nav class="navbar">
+    <a href="/api/jobs/">Jobs</a>
+    <a href="/api/candidates/">Candidates</a>
+    <a href="/api/notifications/">Notifications</a>
+</nav>
 
-<div id="candidateList"></div>
+<div class="container">
+
+    <h2>Candidate List (ATS Score)</h2>
+
+    <div id="candidateList"></div>
+
+</div>
 
 <script src="{% static 'app.js' %}"></script>
+
 </body>
 </html>

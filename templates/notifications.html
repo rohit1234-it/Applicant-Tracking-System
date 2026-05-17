@@ -1,23 +1,30 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ATS Login</title>
+    <title>Notifications</title>
+
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
 
+<nav class="navbar">
+    <a href="/api/jobs/">Jobs</a>
+    <a href="/api/candidates/">Candidates</a>
+    <a href="/api/notifications/">Notifications</a>
+</nav>
+
 <div class="container">
-    <h2>ATS Login</h2>
 
-    <input type="text" placeholder="Username">
-    <input type="password" placeholder="Password">
+    <h2>Notifications</h2>
 
-    <button onclick="login()">Login</button>
+    <div id="notificationList"></div>
+
 </div>
 
 <script src="{% static 'app.js' %}"></script>
+
 </body>
 </html>
