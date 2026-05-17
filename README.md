@@ -8,7 +8,7 @@ This project simulates a real-world recruitment platform similar to Naukri/Linke
 ---
 
 # 🚀 Live Demo
-👉 https://your-live-link.pythonanywhere.com/
+👉https://rohit7709.pythonanywhere.com/
 
 ---
 
