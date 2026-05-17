@@ -6,7 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     #jobs
-    path('', include('jobs.urls')),
+     path('', include('jobs.urls')),          # HTML
     path('api/', include('jobs.api_urls')),
     #candidates 
     path('candidates/', include('candidates.urls')),

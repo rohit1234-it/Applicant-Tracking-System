@@ -1,10 +1,7 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import JobViewSet, home
+from django.urls import path
 
-router = DefaultRouter()
-router.register(r'jobs', JobViewSet)
+from .views import home
 
 urlpatterns = [
-    path('', home),                 # UI page
+    path('', home, name='home'),
 ]
