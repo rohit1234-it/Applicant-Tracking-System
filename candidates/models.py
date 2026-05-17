@@ -8,3 +8,8 @@ class Applicant(models.Model):
     candidate_skills=models.CharField(max_length=55)
     score=models.FloatField(blank=True,null=True)
     applied_job=models.ForeignKey(Jobs, on_delete=models.CASCADE) 
+    
+    def save(self, *args, **kwargs):
+        if self.candidate_skills:
+            self.score = len(self.candidate_skills.split(",")) * 10
+        super().save(*args, **kwargs)
