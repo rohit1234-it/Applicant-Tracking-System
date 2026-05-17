@@ -14,6 +14,9 @@ from notifications.models import Notification
 
 
 # Create your views here.
+def candidates_page(request):
+    return render(request, "candidates.html")
+
 class ApplicantViewSet(viewsets.ModelViewSet):
     queryset=Applicant.objects.all()
     serializer_class=ApplicantSerializer

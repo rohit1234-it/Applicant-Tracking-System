@@ -1,8 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import ApplicantViewSet
+from .views import ApplicantViewSet, candidates_page
 
-r=DefaultRouter()
-r.register('candidates',ApplicantViewSet)
+router = DefaultRouter()
+router.register('candidates', ApplicantViewSet)
 
-urlpatterns =r.urls
+urlpatterns = [
+    path('', candidates_page),          
+    path('api/', include(router.urls)), 
+]

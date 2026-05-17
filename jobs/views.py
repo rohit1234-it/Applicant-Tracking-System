@@ -6,6 +6,9 @@ from .models import Jobs
 
 
 # Create your views here
+def job_page(request):
+    return render(request, "jobs.html")
+
 class JobViewSet(viewsets.ModelViewSet):
     queryset=Jobs.objects.all()
     serializer_class=JobsSerializer
