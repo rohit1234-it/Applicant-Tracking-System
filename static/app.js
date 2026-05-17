@@ -87,8 +87,23 @@ if (document.getElementById("notificationList")) {
 
 
 // LOGIN FUNCTION
-function login() {
+function login(){
 
-    alert("Login functionality coming soon!");
+    const username = document.getElementById("username").value;
+
+    const password = document.getElementById("password").value;
+
+    if(username === "rohit" && password === "rohit12@"){
+
+        window.location.href = "/api/jobs/";
+
+    }
+
+    else{
+
+        alert("Invalid Credentials");
+
+    }
+
 
 }
