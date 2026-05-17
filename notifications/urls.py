@@ -1,11 +1,10 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import NotificationViewSet,notification_page
+from .views import NotificationViewSet, notification_page
 
 router = DefaultRouter()
-router.register('notifications',NotificationViewSet)
+router.register(r'notifications', NotificationViewSet)
 
 urlpatterns = [
-    path('', notification_page),          
-    path('api/', include(router.urls)), 
+    path('', notification_page),    # UI page
 ]

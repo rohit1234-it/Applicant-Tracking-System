@@ -4,27 +4,54 @@
 <html>
 <head>
     <title>Notifications</title>
-
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
-    <a href="/api/jobs/">Jobs</a>
-    <a href="/api/candidates/">Candidates</a>
-    <a href="/api/notifications/">Notifications</a>
+    <div class="logo">ATS System</div>
+
+    <div class="nav-links">
+        <a href="/">Jobs</a>
+        <a href="/candidates/">Candidates</a>
+        <a href="/notifications/">Notifications</a>
+    </div>
 </nav>
 
+<!-- MAIN -->
 <div class="container">
 
-    <h2>Notifications</h2>
+    <h2 class="title">Notifications</h2>
 
-    <div id="notificationList"></div>
+    <div class="list-container">
+
+        {% for n in notifications %}
+            <div class="notification-row">
+
+                <div class="col title">
+                    {{ n.title }}
+                </div>
+
+                <div class="col message">
+                    {{ n.message }}
+                </div>
+                
+
+                <div class="col time">
+                    {{ n.created_at|default:"-" }}
+                </div>
+
+            </div>
+        {% empty %}
+            <p>No notifications found</p>
+        {% endfor %}
+
+    </div>
 
 </div>
-
-<script src="{% static 'app.js' %}"></script>
 
 </body>
 </html>

@@ -7,7 +7,8 @@ from .serializers import NotificationSerializer
 
 # Create your views here.
 def notification_page(request):
-    return render(request, "notifications.html")
+   notification = Notification.objects.all()
+   return render(request, "notifications.html", {"notifications": notification})
 
 
 class NotificationViewSet(viewsets.ModelViewSet):

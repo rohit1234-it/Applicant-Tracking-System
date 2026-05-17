@@ -4,27 +4,65 @@
 <html>
 <head>
     <title>Candidates</title>
-
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
-    <a href="/api/jobs/">Jobs</a>
-    <a href="/api/candidates/">Candidates</a>
-    <a href="/api/notifications/">Notifications</a>
+    <div class="logo">ATS System</div>
+
+    <div class="nav-links">
+        <a href="/">Jobs</a>
+        <a href="/candidates/">Candidates</a>
+        <a href="/notifications/">Notifications</a>
+    </div>
 </nav>
 
+<!-- MAIN -->
 <div class="container">
 
-    <h2>Candidate List (ATS Score)</h2>
+    <h2 class="title">Candidate List</h2>
 
-    <div id="candidateList"></div>
+    <div class="list-container">
+
+        {% for c in candidates %}
+            <div class="candidate-row">
+
+                <div class="col name">
+                    {{ c.candidate_name }}
+                </div>
+
+                <div class="col email">
+                    {{ c.email }}
+                </div>
+
+                <div class="col skills">
+                    {{ c.candidate_skills }}
+                </div>
+
+                <div class="col job">
+                    {{ c.applied_job.title }}
+                </div>
+
+                <div class="col score 
+                    {% if c.score >= 80 %}high
+                    {% elif c.score >= 50 %}medium
+                    {% else %}low
+                    {% endif %}">
+                    {{ c.score|default:"0" }}
+                </div>
+
+            </div>
+        {% empty %}
+            <p>No candidates found</p>
+        {% endfor %}
+
+    </div>
 
 </div>
-
-<script src="{% static 'app.js' %}"></script>
 
 </body>
 </html>

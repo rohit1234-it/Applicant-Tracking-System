@@ -6,8 +6,9 @@ from .models import Jobs
 
 
 # Create your views here
-def job_page(request):
-    return render(request, "jobs.html")
+def home(request):
+    jobs = Jobs.objects.all()
+    return render(request, "jobs.html", {"jobs": jobs})
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset=Jobs.objects.all()

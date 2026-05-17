@@ -1,56 +1,178 @@
-body{
+/* BODY */
+body {
     margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background:rgb(117, 100, 100);
 }
-
 
 /* NAVBAR */
-
-.navbar{
-    background-color: #222;
-    padding: 15px;
-    text-align: center;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background: #111827;
+    color: white;
 }
 
-.navbar a{
+.navbar a {
     color: white;
+    margin-left: 20px;
     text-decoration: none;
-    margin: 20px;
+}
+
+.navbar a:hover {
+    color: #60a5fa;
+}
+
+.logo {
+    font-weight: bold;
     font-size: 18px;
+}
+
+/* CONTAINER */
+.container {
+    padding: 30px;
+}
+
+/* TITLE */
+.title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+/* GRID */
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* WHITE CARD */
+.job-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.job-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+/* TEXT */
+.job-title {
+    margin: 0;
+    font-size: 20px;
+    color: #111827;
+}
+
+.job-skills {
+    margin-top: 10px;
+    color: #4b5563;
+}
+
+.job.h4{
+    font-size: 12px;
+}
+
+ /* for candidates */
+ 
+/* LIST CONTAINER */
+.list-container {
+    margin-top: 20px;
+}
+
+/* ROW STYLE */
+.candidate-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr;
+    gap: 10px;
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.candidate-row:hover {
+    transform: scale(1.01);
+}
+
+/* COLUMN STYLE */
+.col {
+    font-size: 14px;
+    color: #374151;
+}
+
+/* HEADER STYLE (optional if you add header row) */
+.name {
     font-weight: bold;
 }
 
-.navbar a:hover{
-    color: #00bfff;
+/* SCORE COLORS */
+.high {
+    color: #16a34a;
+    font-weight: bold;
 }
 
-
-/* CONTAINER */
-
-.container{
-    width: 80%;
-    margin: auto;
-    margin-top: 40px;
+.medium {
+    color: #f59e0b;
+    font-weight: bold;
 }
 
-
-/* HEADINGS */
-
-h2{
-    text-align: center;
-    margin-bottom: 30px;
+.low {
+    color: #ef4444;
+    font-weight: bold;
 }
 
+/* for notifications  */
 
-/* CARD */
+/* LIST CONTAINER (already exists, reused) */
+.list-container {
+    margin-top: 20px;
+}
 
-.card{
-    background-color: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+/* NOTIFICATION ROW */
+.notification-row {
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr;
+    gap: 15px;
+    background: white;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: 0.2s;
+}
+
+.notification-row:hover {
+    transform: scale(1.01);
+}
+
+/* COLUMN STYLE */
+.col {
+    font-size: 14px;
+    color: #374151;
+}
+
+/* TITLE */
+.notification-row .title {
+    font-weight: bold;
+    color: #111827;
+}
+
+/* MESSAGE */
+.message {
+    color: #4b5563;
+}
+
+/* TIME */
+.time {
+    text-align: right;
+    font-size: 12px;
+    color: #6b7280;
 }

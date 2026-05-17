@@ -1,109 +1,66 @@
-// JOBS PAGE
-if (document.getElementById("jobList")) {
+function loadJobs() {
+    fetch("/api/jobs/")
+        .then(res => res.json())
+        .then(data => {
+            let container = document.getElementById("jobList");
+            container.innerHTML = "";
 
-    fetch("https://rohit7709.pythonanywhere.com/api/jobs/")
-    .then(response => response.json())
-    .then(data => {
+            if (data.length === 0) {
+                container.innerHTML = "<p>No jobs available</p>";
+                return;
+            }
 
-        let output = "";
-
-        data.forEach(job => {
-
-            output += `
-                <div class="card">
-                    <h2>${job.title}</h2>
-                    <p><b>Skills:</b> ${job.required_skills}</p>
-                    <p><b>Created:</b> ${job.created_time}</p>
-                </div>
-            `;
-
+            data.forEach(job => {
+                container.innerHTML += `
+                    <div class="job-card">
+                        <h3>${job.title}</h3>
+                        <p><b>Skills:</b> ${job.required_skills}</p>
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            console.log("Error loading jobs:", error);
+            document.getElementById("jobList").innerHTML =
+                "<p>Failed to load jobs</p>";
         });
-
-        document.getElementById("jobList").innerHTML = output;
-
-    })
-    .catch(error => console.log("Jobs Error:", error));
 }
 
+function loadCandidates() {
+    fetch("/api/candidates/")
+        .then(res => res.json())
+        .then(data => {
+            let container = document.getElementById("candidateList");
+            container.innerHTML = "";
 
+            if (data.length === 0) {
+                container.innerHTML = "<p>No candidates available</p>";
+                return;
+            }
 
-// CANDIDATES PAGE
-if (document.getElementById("candidateList")) {
+            data.forEach(candidate => {
+                container.innerHTML += `
+                    <div class="job-card">
 
-    fetch("https://rohit7709.pythonanywhere.com/api/candidates/")
-    .then(response => response.json())
-    .then(data => {
+                        <h3>${candidate.candidate_name}</h3>
 
-        let output = "";
+                        <p><b>Email:</b> ${candidate.email}</p>
 
-        data.forEach(candidate => {
+                        <p><b>Skills:</b> ${candidate.candidate_skills}</p>
 
-            output += `
-                <div class="card">
-                    <h2>${candidate.candidate_name}</h2>
-                    <p><b>Email:</b> ${candidate.email}</p>
-                    <p><b>Skills:</b> ${candidate.candidate_skills}</p>
-                    <p><b>ATS Score:</b> ${candidate.score}%</p>
-                </div>
-            `;
+                        <p><b>Applied Job:</b> ${
+                            candidate.applied_job?.title || "N/A"
+                        }</p>
 
+                        <p><b>ATS Score:</b> ${candidate.score ?? "Not calculated"}</p>
+
+                    </div>
+                `;
+            });
+        })
+        .catch(error => {
+            console.log("Error loading candidates:", error);
+            document.getElementById("candidateList").innerHTML =
+                "<p>Failed to load candidates</p>";
         });
-
-        document.getElementById("candidateList").innerHTML = output;
-
-    })
-    .catch(error => console.log("Candidates Error:", error));
-}
-
-
-
-// NOTIFICATIONS PAGE
-if (document.getElementById("notificationList")) {
-
-    fetch("https://rohit7709.pythonanywhere.com/api/notifications/")
-    .then(response => response.json())
-    .then(data => {
-
-        let output = "";
-
-        data.forEach(notification => {
-
-            output += `
-                <div class="card">
-                    <h3>${notification.message}</h3>
-                    <p><b>Status:</b> ${notification.is_read ? "Read" : "Unread"}</p>
-                    <p><b>Time:</b> ${notification.created_at}</p>
-                </div>
-            `;
-
-        });
-
-        document.getElementById("notificationList").innerHTML = output;
-
-    })
-    .catch(error => console.log("Notifications Error:", error));
-}
-
-
-
-// LOGIN FUNCTION
-function login(){
-
-    const username = document.getElementById("username").value;
-
-    const password = document.getElementById("password").value;
-
-    if(username === "rohit" && password === "rohit12@"){
-
-        window.location.href = "/api/jobs/";
-
-    }
-
-    else{
-
-        alert("Invalid Credentials");
-
-    }
-
-
 }

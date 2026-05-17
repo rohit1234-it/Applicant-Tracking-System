@@ -4,29 +4,46 @@
 <html>
 <head>
     <title>Jobs</title>
-
     <link rel="stylesheet" href="{% static 'style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
-    <a href="/api/jobs/">Jobs</a>
-    <a href="/api/candidates/">Candidates</a>
-    <a href="/api/notifications/">Notifications</a>
+    <div class="logo">ATS System</div>
+
+    <div class="nav-links">
+        <a href="/">Jobs</a>
+        <a href="/candidates/">Candidates</a>
+        <a href="/notifications/">Notifications</a>
+    </div>
 </nav>
 
+<!-- MAIN -->
 <div class="container">
 
-    <h2>Job List</h2>
+    <h2 class="title">Available Jobs</h2>
 
-    <div id="jobList"></div>
+    <div class="job-grid">
+        {% for job in jobs %}
+            <div class="job-card">
+                <h3 class="job-title">{{ job.title }}</h3>
 
-    
+                <p class="job-skills">
+                    <b>Skills:</b> {{ job.required_skills }}
+                </p>
+                <p class="create">
+                    <h4>Posted By:</h4>{{job.created_time}}
+                </p>
+            </div>
+        {% empty %}
+            <p>No jobs available</p>
+        {% endfor %}
+    </div>
 
 </div>
-
-<script src="{% static 'app.js' %}"></script>
 
 </body>
 </html>

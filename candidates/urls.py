@@ -3,9 +3,10 @@ from rest_framework.routers import DefaultRouter
 from .views import ApplicantViewSet, candidates_page
 
 router = DefaultRouter()
-router.register('candidates', ApplicantViewSet)
+
+# IMPORTANT: empty prefix inside app
+router.register(r'', ApplicantViewSet)
 
 urlpatterns = [
-    path('', candidates_page),          
-    path('api/', include(router.urls)), 
-]
+    path('', candidates_page),   
+    ]
