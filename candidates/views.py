@@ -9,7 +9,6 @@ from jobs.models import Jobs
 from notifications.models import Notification
 
 
-# UI page
 def candidates_page(request):
     candidates = Applicant.objects.all()
     return render(request, "candidates.html", {"candidates": candidates})
@@ -27,31 +26,17 @@ class ApplicantViewSet(viewsets.ModelViewSet):
         skills = request.data.get('candidate_skills')
         job_id = request.data.get('applied_job')
 
-        # fetch job safely
         job = Jobs.objects.get(id=job_id)
 
-        # normalize skills
-        job_skills = set([
-            skill.strip().lower()
-            for skill in job.required_skills.split(',')
-            if skill.strip()
-        ])
+        job_skills = set(skill.strip().lower() for skill in job.required_skills.split(',') if skill.strip())
+        candidate_skills = set(skill.strip().lower() for skill in skills.split(',') if skill.strip())
 
-        candidate_skills = set([
-            skill.strip().lower()
-            for skill in skills.split(',')
-            if skill.strip()
-        ])
+        matched = job_skills.intersection(candidate_skills)
 
-        # scoring logic
-        if len(job_skills) == 0:
-            score = 0
-        else:
-            matched = job_skills.intersection(candidate_skills)
-            score = (len(matched) / len(job_skills)) * 100
-            score = round(score, 2)
+        score = 0
+        if job_skills:
+            score = round((len(matched) / len(job_skills)) * 100, 2)
 
-        # save applicant
         applicant = Applicant.objects.create(
             candidate_name=candidate_name,
             email=email,
@@ -60,19 +45,12 @@ class ApplicantViewSet(viewsets.ModelViewSet):
             score=score
         )
 
-        # notification
         Notification.objects.create(
             message=f"{candidate_name} applied for {job.title}",
             application=applicant
         )
 
-        serializer = ApplicantSerializer(applicant)
-        return Response(serializer.data)
+        return Response(ApplicantSerializer(applicant).data)
 
     def get_queryset(self):
-        min_score = self.request.query_params.get('score')
-
-        if min_score:
-            return Applicant.objects.filter(score__gte=min_score)
-
         return Applicant.objects.all().order_by('-score')
