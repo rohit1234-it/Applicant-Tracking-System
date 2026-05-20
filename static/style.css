@@ -114,18 +114,18 @@ body {
 }
 
 /* SCORE COLORS */
-.high {
-    color: #16a34a;
+.col.score.high{
+    color: #16a34a !important;
     font-weight: bold;
 }
 
-.medium {
-    color: #f59e0b;
+.col.score.medium{
+    color: #f59e0b !important;
     font-weight: bold;
 }
 
-.low {
-    color: #ef4444;
+.col.score.low{
+    color: #ef4444 !important;
     font-weight: bold;
 }
 
