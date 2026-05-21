@@ -25,24 +25,25 @@ class ApplicantViewSet(viewsets.ModelViewSet):
         email = request.data.get('email')
         skills = request.data.get('candidate_skills')
         job_id = request.data.get('applied_job')
-
         job = Jobs.objects.get(id=job_id)
+        
+        def logic(skills):
+            return skills.strip().lower().replace('.', '').replace(' ', '')
+        
+        candidate_skills = {logic(s) for s in skills.split(',') if s.strip()}
+        job_skills = {logic(s) for s in job.required_skills.split(',') if s.strip()}
 
-        job_skills = set(skill.strip().lower() for skill in job.required_skills.split(',') if skill.strip())
-        candidate_skills = set(skill.strip().lower() for skill in skills.split(',') if skill.strip())
+        matched=candidate_skills & job_skills
+        missing = job_skills - candidate_skills
 
-        matched = job_skills.intersection(candidate_skills)
-
-        score = 0
-        if job_skills:
-            score = round((len(matched) / len(job_skills)) * 100, 2)
-
+        score = round((len(matched) / len(job_skills)) * 100, 2)
+        
         applicant = Applicant.objects.create(
             candidate_name=candidate_name,
             email=email,
             candidate_skills=skills,
+            score=score,
             applied_job=job,
-            score=score
         )
 
         Notification.objects.create(
@@ -50,7 +51,11 @@ class ApplicantViewSet(viewsets.ModelViewSet):
             application=applicant
         )
 
-        return Response(ApplicantSerializer(applicant).data)
+        return Response({"candidate_name": candidate_name,
+        "email": email,
+        "matched_skills": list(matched),
+        "missing_skills": list(missing),
+        "score": score})
 
     def get_queryset(self):
         return Applicant.objects.all().order_by('-score')
