@@ -18,6 +18,7 @@ class ApplicantViewSet(viewsets.ModelViewSet):
     queryset = Applicant.objects.all()
     serializer_class = ApplicantSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    http_method_names = ['get', 'post', 'put', 'delete']
 
     def create(self, request, *args, **kwargs):
 
@@ -37,7 +38,7 @@ class ApplicantViewSet(viewsets.ModelViewSet):
         missing = job_skills - candidate_skills
 
         score = round((len(matched) / len(job_skills)) * 100, 2)
-        
+        print(score)
         applicant = Applicant.objects.create(
             candidate_name=candidate_name,
             email=email,
@@ -51,11 +52,7 @@ class ApplicantViewSet(viewsets.ModelViewSet):
             application=applicant
         )
 
-        return Response({"candidate_name": candidate_name,
-        "email": email,
-        "matched_skills": list(matched),
-        "missing_skills": list(missing),
-        "score": score})
+        return Response({"score": score})
 
     def get_queryset(self):
         return Applicant.objects.all().order_by('-score')
