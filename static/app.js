@@ -30,9 +30,9 @@ function loadCandidates() {
     fetch("/api/candidates/")
         .then(res => res.json())
         .then(data => {
+            data.sort((a, b) => b.score - a.score);
             let container = document.getElementById("candidateList");
             container.innerHTML = "";
-            console.log(candidate.score);
             if (data.length === 0) {
                 container.innerHTML = "<p>No candidates available</p>";
                 return;
