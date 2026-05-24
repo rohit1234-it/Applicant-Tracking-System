@@ -42,7 +42,7 @@ function loadCandidates() {
                 container.innerHTML += `
                     <div class="job-card">
 
-                        <h3>${candidate.candidate_name}</h3>
+                       <h3>UPDATED ${candidate.candidate_name}</h3>
 
                         <p><b>Email:</b> ${candidate.email}</p>
 
