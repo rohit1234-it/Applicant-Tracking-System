@@ -55,4 +55,4 @@ class ApplicantViewSet(viewsets.ModelViewSet):
         return Response({"score": score})
 
     def get_queryset(self):
-        return Applicant.objects.all().order_by('-score')
+        return Applicant.objects.all().order_by('-score','-id')
