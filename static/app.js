@@ -31,8 +31,9 @@ function loadCandidates() {
         .then(res => res.json())
         .then(data => {
 
-            data.sort((a, b) => b.score - a.score);
-
+        data.sort((a, b) =>
+        Number(b.score || 0) - Number(a.score || 0)
+    );
             let container = document.getElementById("candidateList");
 
             container.innerHTML = "";
