@@ -177,3 +177,17 @@ body {
     color: #6b7280;
 }
 
+.col.score.high{
+    color: green !important;
+    font-weight: bold !important;
+}
+
+.col.score.medium{
+    color: orange !important;
+    font-weight: bold !important;
+}
+
+.col.score.low{
+    color: red !important;
+    font-weight: bold !important;
+}

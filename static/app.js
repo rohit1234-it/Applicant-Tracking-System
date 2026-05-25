@@ -71,8 +71,11 @@ function loadCandidates() {
             ${candidate.applied_job?.title || "N/A"}
         </div>
 
-        <div class="col"   ${candidate.score >= 80 ? 'high' :
-      candidate.score >= 50 ? 'medium' : 'low'}">
+        <div class="col score ${candidate.score >= 80
+    ? 'high'
+    : candidate.score >= 50
+    ? 'medium'
+    : 'low'}">
             ${candidate.score ?? 0}
         </div>
 
