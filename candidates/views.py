@@ -51,8 +51,14 @@ class ApplicantViewSet(viewsets.ModelViewSet):
             message=f"{candidate_name} applied for {job.title}",
             application=applicant
         )
-
-        return Response({"score": score})
+        
+        return Response({
+            "applied_job": {
+            "id": job.id,
+            "title": job.title
+            },
+            "score": score
+            })
 
     def get_queryset(self):
         return Applicant.objects.all().order_by('-score','-id')

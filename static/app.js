@@ -53,23 +53,30 @@ function loadCandidates() {
             data.forEach(candidate => {
 
                 html += `
-                    <div class="job-card">
+                  <div class="candidate-row">
 
-                        <h3>${candidate.candidate_name}</h3>
+        <div class="col">
+            ${candidate.candidate_name}
+        </div>
 
-                        <p><b>Email:</b> ${candidate.email}</p>
+        <div class="col">
+            ${candidate.email}
+        </div>
 
-                        <p><b>Skills:</b> ${candidate.candidate_skills}</p>
+        <div class="col">
+            ${candidate.candidate_skills}
+        </div>
 
-                        <p><b>Applied Job:</b>
-                            ${candidate.applied_job?.title || "N/A"}
-                        </p>
+        <div class="col">
+            ${candidate.applied_job?.title || "N/A"}
+        </div>
 
-                        <p><b>ATS Score:</b>
-                            ${candidate.score ?? "Not calculated"}
-                        </p>
+        <div class="col"   ${candidate.score >= 80 ? 'high' :
+      candidate.score >= 50 ? 'medium' : 'low'}">
+            ${candidate.score ?? 0}
+        </div>
 
-                    </div>
+    </div>
                 `;
             });
 
