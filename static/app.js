@@ -26,14 +26,19 @@ function loadJobs() {
         });
 }
 
+console.log("JS FILE LOADED");
 function loadCandidates() {
+                    console.log("FUNCTION CALLED");
+
     fetch("/api/candidates/")
         .then(res => res.json())
         .then(data => {
 
-        data.sort((a, b) =>
-        Number(b.score || 0) - Number(a.score || 0)
-    );
+             console.log("before sorted Sort:", data);
+             data.sort((a, b) =>
+                Number(b.score || 0) - Number(a.score || 0));
+             console.log('sorted data',data)
+
             let container = document.getElementById("candidateList");
 
             container.innerHTML = "";
@@ -78,5 +83,6 @@ function loadCandidates() {
 
             document.getElementById("candidateList").innerHTML =
                 "<p>Failed to load candidates</p>";
-        });
+});
 }
+loadCandidates();  
